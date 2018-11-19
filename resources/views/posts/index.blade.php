@@ -12,6 +12,7 @@
             </ul>
         </div>
     </div>
+<posts-list v-bind:posts="{{ $posts }}"></posts-list>
 </div>
- 
+
 @endsection
