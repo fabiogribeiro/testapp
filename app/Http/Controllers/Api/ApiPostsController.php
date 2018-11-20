@@ -18,5 +18,13 @@ class ApiPostsController extends Controller
 
     public function create(Request $request)
     {
+        $post = new Post;
+
+        $post->title = $request->title;
+        $post->body = $request->body;
+
+        $post->save();
+
+        return $post;
     }
 }
