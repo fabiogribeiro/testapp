@@ -1,5 +1,5 @@
 <template>
-  <div class=container>
+  <form v-on:submit.prevent="$emit('add-post', title, body)">
     <div class="form-group row">
         <label for="title" class="col-sm-4 col-form-label text-md-right">Title</label>
 
@@ -18,11 +18,11 @@
     </div>
 
     <div class="col-md-8 offset-md-4">
-      <button v-on:click="$emit('add-post', title, body)" type="submit" class="btn btn-primary">
+      <button type="submit" class="btn btn-primary">
           Add post
       </button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>

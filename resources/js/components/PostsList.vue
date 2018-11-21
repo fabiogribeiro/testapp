@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <ul v-on:add-post="addPost">
-      <li style="margin-bottom: 5px" v-for="(post, index) in postList" :key="post.id">
+    <ul>
+      <li v-for="(post, index) in postList" :key="post.id">
           {{ post.title }}
 
           <button v-on:click="removePost(post.id, index)" type="submit" class="btn btn-sm btn-danger">
@@ -49,3 +49,9 @@
     }
   }
 </script>
+
+<style scoped>
+li {
+  margin-bottom: 5px
+}
+</style>
