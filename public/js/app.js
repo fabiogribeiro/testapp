@@ -47544,6 +47544,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['posts'],
@@ -47555,7 +47561,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   methods: {
-    addPost: function addPost(event) {
+    addPost: function addPost() {
       var posts = this.postList;
 
       axios.post('/api/posts/create', {
@@ -47563,6 +47569,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         body: this.body
       }).then(function (response) {
         posts.push(response.data);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    removePost: function removePost(id, index) {
+      var posts = this.postList;
+
+      axios.delete('/api/posts/delete/' + id).then(function (response) {
+        if (response.data.success) {
+          posts.splice(index, 1);
+        }
       }).catch(function (error) {
         console.log(error);
       });
@@ -47587,14 +47604,35 @@ var render = function() {
           _c("div", { staticClass: "card-body" }, [
             _c(
               "ul",
-              _vm._l(_vm.postList, function(post) {
-                return _c("li", { key: post.id }, [
-                  _vm._v(
-                    "\n                      " +
-                      _vm._s(post.title) +
-                      "\n                    "
-                  )
-                ])
+              _vm._l(_vm.postList, function(post, index) {
+                return _c(
+                  "li",
+                  { key: post.id, staticStyle: { "margin-bottom": "5px" } },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(post.title) +
+                        "\n\n                        "
+                    ),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-danger",
+                        attrs: { type: "submit" },
+                        on: {
+                          click: function($event) {
+                            _vm.removePost(post.id, index)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                          Remove\n                        "
+                        )
+                      ]
+                    )
+                  ]
+                )
               })
             ),
             _vm._v(" "),

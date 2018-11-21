@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/posts', 'Api\ApiPostsController@all');
 Route::post('/posts/create', 'Api\ApiPostsController@create');
+Route::delete('/posts/delete/{id}', 'Api\ApiPostsController@destroy');

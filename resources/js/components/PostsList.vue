@@ -8,9 +8,15 @@
                     <div class="card-body">
 
                       <ul>
-                        <li v-for="post in postList" :key="post.id">
-                          {{ post.title }}
+                        <li style="margin-bottom: 5px" v-for="(post, index) in postList" :key="post.id">
+                            {{ post.title }}
+
+                            <button v-on:click="removePost(post.id, index)" type="submit" class="btn btn-sm btn-danger">
+                              Remove
+                            </button>
                         </li>
+
+                        
                       </ul>
 
                       <div class="form-group row">
@@ -53,7 +59,7 @@
         }
       },
       methods: {
-        addPost: function (event) {
+        addPost: function () {
           var posts = this.postList
 
           axios.post('/api/posts/create', {
@@ -64,6 +70,18 @@
           }).catch(function (error) {
             console.log(error)
           })
+        },
+        removePost: function (id, index) {
+          var posts = this.postList
+
+          axios.delete('/api/posts/delete/' + id)
+            .then(function (response) {
+              if (response.data.success) {
+                posts.splice(index, 1)
+              }
+            }).catch(function (error) {
+              console.log(error)
+            })
         }
       }
     }
