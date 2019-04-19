@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <ul>
+    <h4 v-on:click="open = !open">Posts</h4>
+    <ul v-if="open">
       <li v-for="(post, index) in postList" :key="post.id">
           {{ post.title }}
 
@@ -18,7 +19,8 @@
     props: ['posts'],
     data: function () {
       return {
-        postList: this.posts
+        postList: this.posts,
+        open: true,
       }
     },
     methods: {
@@ -53,5 +55,9 @@
 <style scoped>
 li {
   margin-bottom: 5px
+}
+
+h4 {
+  cursor: pointer;
 }
 </style>
